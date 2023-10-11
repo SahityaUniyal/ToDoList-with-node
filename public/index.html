@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>ToDo List</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>ToDo List</h1>
+      </header>
+      <main>
+        <form id="inputSection" action="">
+          <input class="task" type="text" placeholder="Add a ToDo" />
+          <button id="add" class="add btn">+</button>
+        </form>
+      </main>
+      <section class="filters">
+        <div class="search-container">
+          <input
+            type="text"
+            placeholder="Search"
+            name="search"
+            class="search"
+          />
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+        <button class="deleteBtn">DELETE ALL</button>
+      </section>
+      <h1>Task List</h1>
+      <section class="displayList">
+        <ul class="tasks">
+          <!-- <li class="task-item">
+            <input class="checkbox" type="checkbox" />
+            <p class="checked taskContent">Task</p>
+            <button class="deleteItem fa fa-trash" aria-hidden="true"></button>
+          </li> -->
+        </ul>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

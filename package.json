@@ -1,0 +1,21 @@
+{
+  "name": "todolist-with-node",
+  "version": "1.0.0",
+  "description": "To do list app using node, express, express-async-error, mongoose and other packages",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "mongoose": "^7.6.1"
+  }
+}
