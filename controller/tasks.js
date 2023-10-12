@@ -3,7 +3,13 @@ const Tasks = require('../model/tasks');
 
 // Getting all tasks from Database
 const getAllTasks = async (req, res) => {
-    const tasks = await Tasks.find();
+    let queryObject = {};
+    const { name } = req.query;
+    if (name) {
+        queryObject.name = { $regex: name, $options: 'i' };
+    }
+    let result = await Tasks.find(queryObject).sort({ completed: 0 }).exec();
+    const tasks = result;
     res.status(200).json({ tasks });
 }
 
@@ -40,6 +46,10 @@ const updateTask = async (req, res) => {
     }
     res.status(200).json({ task });
 }
+// Filter Task
+// const filterTask = async (req, res) => {
+//     console.log(req.params);
+// }
 module.exports = {
     getAllTasks,
     createTask,

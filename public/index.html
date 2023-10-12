@@ -37,14 +37,15 @@
       <section class="displayList">
         <ul class="tasks">
           <!-- <li class="task-item">
-            <input class="checkbox" type="checkbox" />
-            <p class="checked taskContent">Task</p>
-            <button class="deleteItem fa fa-trash" aria-hidden="true"></button>
-          </li> -->
+            <input id="${task._id}" class="checkbox" type="checkbox" checked/>
+            <p class="taskContent checked">${task.name}</p>
+            <i id= "${task._id}" class="deleteItem fa fa-trash" aria-hidden="true"></i>
+            </li> -->
         </ul>
       </section>
     </div>
 
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./browser-app.js"></script>
   </body>
 </html>

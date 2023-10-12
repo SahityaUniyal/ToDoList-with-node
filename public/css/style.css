@@ -7,6 +7,10 @@
   font-family: "Poppins", sans-serif;
   font-size: inherit;
 }
+
+.hidden {
+  display: none;
+}
 body {
   display: flex;
   min-height: 100vh;
@@ -108,13 +112,21 @@ main {
 .taskContent {
   flex-grow: 1;
 }
+.fa-pencil-square {
+  background-color: white;
+  color: black;
+  padding: 1px;
+  line-height: 100%;
+  align-self: center;
+  border-radius: 5px;
+  border: none;
+}
 .fa-trash {
   background-color: hsl(0, 91%, 71%);
-  padding: 10px;
-  margin-left: 10px;
+  padding: 5px;
   border-radius: 5px;
   font-size: small;
-  line-height: 80%;
+  line-height: 100%;
   align-self: center;
   border: none;
 }
@@ -146,6 +158,9 @@ main {
     width: 70%;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+  }
+  .taskContent {
+    text-wrap: balance;
   }
   .add {
     border-top-left-radius: 0;
