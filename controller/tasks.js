@@ -5,6 +5,7 @@ const Tasks = require('../model/tasks');
 const getAllTasks = async (req, res) => {
     let queryObject = {};
     const { name } = req.query;
+    // Used with filter
     if (name) {
         queryObject.name = { $regex: name, $options: 'i' };
     }
@@ -46,10 +47,6 @@ const updateTask = async (req, res) => {
     }
     res.status(200).json({ task });
 }
-// Filter Task
-// const filterTask = async (req, res) => {
-//     console.log(req.params);
-// }
 module.exports = {
     getAllTasks,
     createTask,

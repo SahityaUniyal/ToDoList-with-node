@@ -40,11 +40,9 @@ const showTasks = async (url = '/api/v1/tasks') => {
         tasksDisplay.innerHTML = incompleteHTML + completedHTML; // update the tasks display
     }
     catch (error) {
-        console.log(error);
+        errorMessage("Problem Getting Tasks");
     }
-
 }
-
 showTasks();
 
 // event listeners
@@ -55,9 +53,10 @@ addBtn.addEventListener('click', async (e) => {
         const newTaskValue = inputTask.value.trim();
         const { data: { task } } = await axios.post('/api/v1/tasks', { name: newTaskValue });
         inputTask.value = "";// Clear input field
-        showTasks();
+        await showTasks();
+        successMessage("Task Addded")
     } catch (error) {
-        console.log(error);
+        errorMessage("Task Value Empty")
     }
 });
 // Delete All Tasks
@@ -65,7 +64,8 @@ deleteAllBtn.addEventListener('click', async (e) => {
     try {
         e.preventDefault();
         await axios.delete('/api/v1/tasks');
-        showTasks();
+        await showTasks();
+        successMessage("All Tasks Deleted");
     }
     catch (error) {
         console.log(error);
@@ -78,7 +78,8 @@ tasksDisplay.addEventListener('click', async (e) => {
         const targetElement = e.target;
         if (targetElement.classList.contains('deleteItem')) {
             await axios.delete(`/api/v1/tasks/${targetElement.id}`);
-            showTasks();
+            await showTasks();
+            successMessage("Task Deleted");
         }
     } catch (error) {
         console.log(error);
@@ -112,7 +113,8 @@ const editTaskName = async (id, value) => {
             throw Error('Task value cannot be empty');
         }
         const task = await axios.patch(`/api/v1/tasks/${id}`, { name: value });
-        showTasks();
+        await showTasks();
+        successMessage("Edit Successful");
     } catch (error) {
         console.log(error);
     }

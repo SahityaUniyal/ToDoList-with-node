@@ -7,10 +7,30 @@
   font-family: "Poppins", sans-serif;
   font-size: inherit;
 }
-
+:root {
+  /* color */
+  --bs-success: #198754;
+  --bs-danger: #dc3545;
+}
 .hidden {
   display: none;
 }
+.failure {
+  background-color: var(--bs-danger);
+}
+.success {
+  background-color: var(--bs-success);
+}
+/* Status Message */
+.status-message {
+  color: white;
+  padding: 5px 20px;
+  width: fit-content;
+  text-align: center;
+  font-size: large;
+  border-radius: 10px;
+}
+
 body {
   display: flex;
   min-height: 100vh;
