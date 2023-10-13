@@ -24,14 +24,14 @@ const showTasks = async (url = '/api/v1/tasks') => {
             if (task.completed == true) {
                 completedHTML += `<li class="task-item">
                 <input id="${task._id}" class="checkbox" type="checkbox" checked/>
-                <p class="taskContent checked">${task.name}</p>
+                <p id="${task._id}" class="taskContent checked">${task.name}</p>
                 <i id="${task._id}" class="fa fa-pencil-square edit-task" aria-hidden="true"></i>
                 <i id="${task._id}" class="deleteItem fa fa-trash" aria-hidden="true"></i>
                 </li>`;
             } else {
                 incompleteHTML += `<li class="task-item">
                 <input id="${task._id}" class="checkbox" type="checkbox"/>
-                <p class="taskContent">${task.name}</p>
+                <p id="${task._id}" class="taskContent">${task.name}</p>
                 <i id="${task._id}" class="fa fa-pencil-square edit-task" aria-hidden="true"></i>
                 <i id="${task._id}" class="deleteItem fa fa-trash" aria-hidden="true"></i>
                 </li>`;
@@ -106,8 +106,42 @@ tasksDisplay.addEventListener('click', async (e) => {
 });
 
 // Edit Task
-tasksDisplay.addEventListener('click', async (e) => {
-    if (e.target.classList.contains("edit-task")) {
-        console.log(e.target);
+const editTaskName = async (id, value) => {
+    try {
+        if (value === "") {
+            throw Error('Task value cannot be empty');
+        }
+        const task = await axios.patch(`/api/v1/tasks/${id}`, { name: value });
+        showTasks();
+    } catch (error) {
+        console.log(error);
+    }
+}
+tasksDisplay.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (e.target.classList.contains("fa-check-square")) {
+        // Switch to icon from save to edit
+        e.target.classList.remove('fa-check-square');
+        e.target.classList.add("fa-pencil-square");
+        const editTask = document.querySelector(`input[id='${e.target.id}'][class="taskContent"]`);
+        editTaskName(editTask.id, editTask.value);
+    }
+    else if (e.target.classList.contains("edit-task")) {
+        const editTaskID = e.target.id;
+        // Switch icon from edit to save
+        e.target.classList.remove("fa-pencil-square");
+        e.target.classList.add('fa-check-square');
+        // getting the task to be edited
+        const editTask = document.querySelector(`p[id='${editTaskID}']`);
+        // Element that will take edit input
+        let a = document.createElement('input');
+        a.classList = editTask.classList;
+        a.id = editTaskID;
+        a.value = editTask.innerHTML;
+        // replacing paragraph task with input field to edit
+        editTask.parentNode.replaceChild(a, editTask);
+        a.focus();
+        // If focus on edit is lost we change the task value
+        a.addEventListener('blur', (e) => { editTaskName(e.target.id, e.target.value) });
     }
 })
